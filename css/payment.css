@@ -1,0 +1,64 @@
+/* payment.css */
+.pay-page { min-height:calc(100vh - 64px); padding:2rem 5%; background:var(--bg); }
+.pay-wrap { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.pay-title { font-size:24px; font-weight:800; margin-bottom:6px; }
+.pay-sub { font-size:14px; color:var(--text2); margin-bottom:20px; }
+
+/* PLAN BOX */
+.plan-box { background:linear-gradient(135deg,var(--purple),#a855f7); border-radius:16px; padding:18px 20px; margin-bottom:14px; }
+.pb-label { font-size:10px; font-weight:700; color:rgba(255,255,255,0.65); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:8px; }
+.pb-row { display:flex; justify-content:space-between; align-items:center; }
+.pb-name { font-size:26px; font-weight:800; color:#fff; }
+.pb-price { font-size:14px; color:rgba(255,255,255,0.8); margin-top:2px; }
+.pb-change { background:rgba(255,255,255,0.2); border:none; color:#fff; border-radius:8px; padding:7px 14px; font-size:13px; font-weight:600; cursor:pointer; font-family:var(--font); transition:background 0.2s; }
+.pb-change:hover { background:rgba(255,255,255,0.3); }
+
+/* PROMO */
+.promo-box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px 18px; margin-bottom:14px; }
+.promo-lbl { font-size:11px; font-weight:700; color:var(--purple); letter-spacing:0.1em; margin-bottom:10px; }
+.promo-row { display:flex; gap:8px; }
+.promo-inp { flex:1; background:var(--bg); border:1.5px solid var(--border); border-radius:10px; padding:10px 14px; font-size:14px; color:var(--text); font-family:var(--font); outline:none; transition:border-color 0.2s; }
+.promo-inp:focus { border-color:var(--purple); }
+.promo-msg { font-size:13px; font-weight:500; margin-top:8px; }
+.promo-msg.ok { color:var(--green); } .promo-msg.err { color:var(--red); }
+
+/* CARD INFO */
+.card-box { background:var(--bg2); border-radius:16px; padding:20px; }
+[data-theme="light"] .card-box { background:#1a1a2e; }
+.cb-title { font-size:16px; font-weight:700; color:#fff; margin-bottom:4px; }
+.cb-sub { font-size:13px; color:rgba(255,255,255,0.55); margin-bottom:16px; }
+.card-row { background:rgba(255,255,255,0.07); border-radius:12px; padding:13px 15px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
+.cr-label { font-size:11px; color:rgba(255,255,255,0.5); font-weight:600; margin-bottom:3px; letter-spacing:0.05em; }
+.cr-val { font-size:15px; font-weight:700; color:#fff; font-family:var(--mono); }
+.cr-copy { background:rgba(255,255,255,0.14); border:none; color:#fff; border-radius:8px; padding:7px 13px; font-size:12px; font-weight:600; cursor:pointer; font-family:var(--font); transition:background 0.2s; }
+.cr-copy:hover { background:rgba(255,255,255,0.25); }
+.cr-copy.copied { background:rgba(34,197,94,0.3); }
+.pay-warn { background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); border-radius:10px; padding:12px 14px; font-size:13px; color:#fbbf24; line-height:1.6; margin-top:4px; }
+
+/* AFTER PAYMENT */
+.after-box { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px; margin-bottom:14px; }
+.after-box .ab-ico { font-size:40px; margin-bottom:12px; }
+.after-box h3 { font-size:18px; font-weight:700; margin-bottom:16px; }
+.after-steps { list-style:none; counter-reset:steps; display:flex; flex-direction:column; gap:14px; }
+.after-steps li { counter-increment:steps; display:flex; flex-direction:column; gap:4px; }
+.after-steps li::before { content:counter(steps); width:24px; height:24px; background:var(--purple); color:#fff; border-radius:50%; font-size:12px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; margin-bottom:4px; }
+.after-steps li strong { font-size:15px; font-weight:700; color:var(--text); }
+.after-steps li p { font-size:13px; color:var(--text2); line-height:1.6; padding-left:0; }
+.tg-link { display:inline-flex; align-items:center; gap:6px; background:#0088cc; color:#fff; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600; text-decoration:none; margin-top:6px; transition:background 0.2s; }
+.tg-link:hover { background:#006fa3; }
+.support-note { font-size:12px; color:var(--text3); margin-top:14px; }
+.support-note a { color:var(--purple); }
+.already-box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; text-align:center; }
+.already-box p { font-size:14px; color:var(--text2); margin-bottom:10px; }
+
+/* PLAN MODAL */
+.plan-opts { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+.plan-opt { border:2px solid var(--border); border-radius:14px; padding:14px; cursor:pointer; transition:all 0.2s; text-align:center; }
+.plan-opt:hover { border-color:var(--purple); }
+.plan-opt.sel { border-color:var(--purple); background:var(--purpleD); }
+.po-badge { font-size:10px; background:var(--green); color:#fff; border-radius:10px; padding:2px 8px; margin-bottom:6px; display:inline-block; font-weight:700; }
+.po-name { font-size:18px; font-weight:800; margin-bottom:2px; }
+.po-price { font-size:13px; color:var(--purple); font-weight:600; }
+.po-desc { font-size:11px; color:var(--text3); }
+
+@media(max-width:700px) { .pay-wrap { grid-template-columns:1fr; } }

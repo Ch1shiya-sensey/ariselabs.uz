@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>To'lov — AriseLabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/payment.css">
+</head>
+<body class="page-body">
+<script src="../js/theme.js"></script>
+
+<nav class="navbar" id="nav">
+  <a href="../index.html" class="nav-logo">Arise<span>Labs</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="langUZ" onclick="setLang('uz')">UZ</button>
+      <button class="lang-btn" id="langRU" onclick="setLang('ru')">RU</button>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()"><span id="themeIcon">☀</span></button>
+    <a href="login.html" class="btn-ghost" data-uz="Kirish" data-ru="Войти">Kirish</a>
+  </div>
+</nav>
+
+<div class="pay-page">
+  <div class="pay-wrap">
+
+    <!-- LEFT COLUMN -->
+    <div class="pay-left">
+      <h2 class="pay-title" data-uz="To'lov" data-ru="Оплата">To'lov</h2>
+      <p class="pay-sub" data-uz="Pro rejani faollashtirish uchun quyidagi ko'rsatmalarga amal qiling" data-ru="Следуйте инструкциям ниже для активации Pro плана">Pro rejani faollashtirish uchun quyidagi ko'rsatmalarga amal qiling</p>
+
+      <!-- PLAN BOX -->
+      <div class="plan-box">
+        <div class="pb-label" data-uz="TANLANGAN REJA" data-ru="ВЫБРАННЫЙ ПЛАН">TANLANGAN REJA</div>
+        <div class="pb-row">
+          <div>
+            <div class="pb-name" id="pbName">Pro</div>
+            <div class="pb-price" id="pbPrice">36,000 UZS/oy</div>
+          </div>
+          <button class="pb-change" onclick="showPlanModal()" data-uz="O'zgartirish" data-ru="Изменить">O'zgartirish</button>
+        </div>
+      </div>
+
+      <!-- PROMO CODE -->
+      <div class="promo-box">
+        <div class="promo-lbl">🏷 PROMO KOD</div>
+        <div class="promo-row">
+          <input type="text" id="promoInput" class="promo-inp" data-uz="Promo kodni kiriting" data-ru="Введите промокод" placeholder="Promo kodni kiriting">
+          <button class="btn-primary" onclick="applyPromo()" data-uz="Qo'llash" data-ru="Применить">Qo'llash</button>
+        </div>
+        <div id="promoMsg" class="promo-msg"></div>
+      </div>
+
+      <!-- CARD INFO -->
+      <div class="card-box">
+        <div class="cb-title" data-uz="To'lovni o'tkazing" data-ru="Переведите оплату">To'lovni o'tkazing</div>
+        <div class="cb-sub" id="payDesc" data-uz="Quyidagi kartaga aynan 36,000 UZS yuboring" data-ru="Переведите ровно 36,000 UZS на карту ниже">Quyidagi kartaga aynan 36,000 UZS yuboring</div>
+
+        <!-- ✏️ KARTA RAQAMINGIZNI SHU YERGA YOZING -->
+        <div class="card-row">
+          <div>
+            <div class="cr-label" data-uz="Karta raqami" data-ru="Номер карты">Karta raqami</div>
+            <div class="cr-val" id="cardNumVal">9860 1701 0925 9607</div>
+          </div>
+          <button class="cr-copy" id="copyBtn1" onclick="copyText('9860350148433930','copyBtn1')">Nusxa</button>
+        </div>
+
+        <!-- ✏️ ISMINGIZNI SHU YERGA YOZING -->
+        <div class="card-row">
+          <div>
+            <div class="cr-label" data-uz="Karta egasi" data-ru="Владелец карты">Karta egasi</div>
+            <div class="cr-val" id="cardOwnerVal">Islomjon Karimjonov</div>
+          </div>
+          <button class="cr-copy" id="copyBtn2" onclick="copyText('Mukhammadyor Boltaboev','copyBtn2')">Nusxa</button>
+        </div>
+
+        <div class="card-row">
+          <div>
+            <div class="cr-label" data-uz="Summa" data-ru="Сумма">Summa</div>
+            <div class="cr-val" id="copyAmountVal">36,000 UZS</div>
+          </div>
+          <button class="cr-copy" id="copyBtn3" onclick="copyText('36000','copyBtn3')">Nusxa</button>
+        </div>
+
+        <div class="pay-warn" data-uz="⚠️ Yuqorida ko'rsatilgan summani aniq o'tkazing. Boshqa summa tekshiruv muvaffaqiyatsizligiga olib kelishi mumkin." data-ru="⚠️ Переводите точно указанную сумму. Другая сумма может привести к ошибке проверки.">
+          ⚠️ Yuqorida ko'rsatilgan summani aniq o'tkazing. Boshqa summa tekshiruv muvaffaqiyatsizligiga olib kelishi mumkin.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="pay-right">
+      <div class="after-box">
+        <div class="ab-ico">✅</div>
+        <h3 data-uz="To'lovdan keyin nima qilish kerak?" data-ru="Что делать после оплаты?">To'lovdan keyin nima qilish kerak?</h3>
+        <ol class="after-steps">
+          <li>
+            <strong data-uz="Chekni saqlang" data-ru="Сохраните чек">Chekni saqlang</strong>
+            <p data-uz="To'lov amalga oshirilgandan keyin bank ilovasidan chek skrinshotini oling" data-ru="После оплаты сделайте скриншот чека в банковском приложении">To'lov amalga oshirilgandan keyin bank ilovasidan chek skrinshotini oling</p>
+          </li>
+          <li>
+            <strong data-uz="Telegram'ga yuboring" data-ru="Отправьте в Telegram">Telegram'ga yuboring</strong>
+            <p data-uz="Chek skrinshotini quyidagi Telegram'ga yuboring va 'Pro reja' deb yozing:" data-ru="Отправьте скриншот чека в Telegram ниже и напишите 'Pro plan':">Chek skrinshotini quyidagi Telegram'ga yuboring va 'Pro reja' deb yozing:</p>
+            <!-- ✏️ TELEGRAM USERNAME'INGIZNI SHU YERGA YOZING -->
+            <a href="https://t.me/meloneex" target="_blank" class="tg-link">
+              📨 @meloneex
+            </a>
+          </li>
+          <li>
+            <strong data-uz="Login va parol oling" data-ru="Получите логин и пароль">Login va parol oling</strong>
+            <p data-uz="Biz 1-2 soat ichida (9:00–22:00) login va parolingizni Telegram orqali yuboramiz" data-ru="Мы вышлем логин и пароль через Telegram в течение 1-2 часов (9:00–22:00)">Biz 1-2 soat ichida (9:00–22:00) login va parolingizni Telegram orqali yuboramiz</p>
+          </li>
+        </ol>
+        <div class="support-note">
+          <span data-uz="Savollar uchun:" data-ru="По вопросам:">Savollar uchun:</span>
+          <a href="https://t.me/meloneex" target="_blank">Telegram orqali bog'laning</a>
+        </div>
+      </div>
+
+      <div class="already-box">
+        <p data-uz="Allaqachon to'lov qildingizmi va login oldingizmi?" data-ru="Уже оплатили и получили логин?">Allaqachon to'lov qildingizmi va login oldingizmi?</p>
+        <a href="login.html" class="btn-outline btn-full" data-uz="Kirish →" data-ru="Войти →">Kirish →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PLAN MODAL -->
+<div class="modal-bg" id="planModal" onclick="hidePlanModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3 class="modal-title" data-uz="Reja tanlang" data-ru="Выберите план">Reja tanlang</h3>
+    <div class="plan-opts">
+      <div class="plan-opt" onclick="selectPlan('free',0)">
+        <div class="po-name" data-uz="Bepul" data-ru="Бесплатно">Bepul</div>
+        <div class="po-price">0 UZS/oy</div>
+        <div class="po-desc" data-uz="2 ta modul" data-ru="2 модуля">2 ta modul</div>
+      </div>
+      <div class="plan-opt sel" onclick="selectPlan('pro',29000)">
+        <div class="po-badge" data-uz="Tavsiya" data-ru="Рекомендуем">Tavsiya</div>
+        <div class="po-name">Pro</div>
+        <div class="po-price">36,000 UZS/oy</div>
+        <div class="po-desc" data-uz="20 ta modul + AI" data-ru="20 модулей + ИИ">20 ta modul + AI</div>
+      </div>
+    </div>
+    <button class="btn-primary btn-full" onclick="hidePlanModal()" data-uz="Tasdiqlash" data-ru="Подтвердить">Tasdiqlash</button>
+  </div>
+</div>
+
+<script src="../js/lang.js"></script>
+<script src="../js/payment.js"></script>
+</body>
+</html>

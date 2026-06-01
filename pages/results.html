@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Natijalar — AriseLabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<style>
+.results-header{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:24px}
+.rh-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center}
+.rh-val{font-size:28px;font-weight:800;color:var(--purple);font-family:var(--mono)}
+.rh-lbl{font-size:12px;color:var(--text2);margin-top:4px}
+.results-full{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.rf-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:10px;padding:13px 18px;border-bottom:1px solid var(--border);align-items:center;font-size:14px}
+.rf-row:last-child{border-bottom:none}
+.rf-head{background:var(--bg2);font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+.rf-empty{text-align:center;padding:3rem;color:var(--text2)}
+.bar-wrap{height:5px;background:var(--border);border-radius:3px;margin-top:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--purple),#c084fc)}
+.clear-btn{background:none;border:1px solid rgba(239,68,68,.4);color:var(--red);border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:var(--font);transition:all .2s}
+.clear-btn:hover{background:rgba(239,68,68,.1)}
+</style>
+</head>
+<body class="page-body">
+<script src="../js/theme.js"></script>
+
+<div class="dash-wrap">
+<aside class="sidebar" id="sidebar">
+  <a href="dashboard.html" class="sb-logo">Arise<span>Labs</span></a>
+  <nav class="sb-nav">
+    <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+    <a href="tests.html"     class="sb-link"><span class="sb-icon">📝</span>Mock Testlar</a>
+    <a href="modules.html"   class="sb-link"><span class="sb-icon">📚</span>Modullar</a>
+    <a href="results.html"   class="sb-link active"><span class="sb-icon">📊</span>Natijalar</a>
+    <a href="profile.html"   class="sb-link"><span class="sb-icon">👤</span>Profil</a>
+  </nav>
+  <div class="sb-bottom">
+    <div class="sb-plan-chip"><span class="sb-plan-badge planBadge">FREE</span><span class="sb-plan-info userName">—</span></div>
+    <button class="sb-logout" onclick="logout()">← Chiqish</button>
+  </div>
+</aside>
+
+<div class="dash-main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="burger-sb" onclick="toggleSidebar()">☰</button>
+      <div class="topbar-title" data-uz="Natijalarim" data-ru="Мои результаты">Natijalarim</div>
+    </div>
+    <div class="topbar-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="langUZ" onclick="setLang('uz')">UZ</button>
+        <button class="lang-btn" id="langRU" onclick="setLang('ru')">RU</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()"><span id="themeIcon">☀</span></button>
+      <div class="topbar-user"><span class="userName">—</span><div class="user-av userInitial">U</div></div>
+    </div>
+  </div>
+
+  <div class="dash-content">
+    <div class="dc-inner">
+      <div class="results-header" id="resultsHeader"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div class="section-h" data-uz="Test tarixi" data-ru="История тестов">Test tarixi</div>
+        <button class="clear-btn" onclick="clearResults()" data-uz="Tarixni tozalash" data-ru="Очистить историю">Tarixni tozalash</button>
+      </div>
+      <div class="results-full" id="resultsList"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="ai-chat-fab"><button class="ai-fab-btn" onclick="toggleChat()">🤖</button></div>
+<div class="ai-chat-box" id="aiChatBox">
+  <div class="ai-chat-header"><span class="ai-dot"></span><span>AI Yordamchi</span><button onclick="toggleChat()">✕</button></div>
+  <div class="ai-messages" id="chatMessages"><div class="ai-msg bot">Savol bering! 🎓</div></div>
+  <div class="ai-chat-input"><input type="text" id="chatInput" placeholder="Savol bering..."><button onclick="sendChatMsg()">→</button></div>
+</div>
+
+<script src="../js/lang.js"></script>
+<script src="../js/dashboard.js"></script>
+<script>
+const results = JSON.parse(localStorage.getItem(`al_results_${session?.login}`) || '[]');
+const total   = results.length;
+const avg     = total ? Math.round(results.reduce((a,r) => a+r.percent,0)/total) : 0;
+const best    = total ? Math.max(...results.map(r=>r.percent)) : 0;
+const mins    = results.reduce((a,r) => a+(r.duration||0), 0);
+
+document.getElementById('resultsHeader').innerHTML = `
+  <div class="rh-box"><div class="rh-val">${total}</div><div class="rh-lbl" data-uz="Jami testlar" data-ru="Всего тестов">Jami testlar</div></div>
+  <div class="rh-box"><div class="rh-val">${avg}%</div><div class="rh-lbl" data-uz="O'rtacha" data-ru="Среднее">O'rtacha</div></div>
+  <div class="rh-box"><div class="rh-val">${best}%</div><div class="rh-lbl" data-uz="Eng yaxshi" data-ru="Лучший">Eng yaxshi</div></div>
+  <div class="rh-box"><div class="rh-val">${mins}</div><div class="rh-lbl" data-uz="Daqiqa" data-ru="Минут">Daqiqa</div></div>`;
+
+const list = document.getElementById('resultsList');
+if (!results.length) {
+  list.innerHTML = '<div class="rf-empty" data-uz="Hali hech qanday test ishlanmagan 📝" data-ru="Тестов пока нет 📝">Hali hech qanday test ishlanmagan 📝</div>';
+} else {
+  const rows = results.slice().reverse().map(r => {
+    const cls = r.percent>=70?'score-high':r.percent>=40?'score-mid':'score-low';
+    return `<div class="rf-row">
+      <div><div style="font-weight:500;font-size:13px">${r.testName||'Test'}</div><div class="bar-wrap"><div class="bar-fill" style="width:${r.percent}%"></div></div></div>
+      <div style="font-size:13px;color:var(--text2)">${r.date||'—'}</div>
+      <div style="font-size:13px">${r.correct}/${r.total}</div>
+      <div><span class="score-pill ${cls}">${r.percent}%</span></div>
+      <div style="font-size:12px;color:var(--text3)">${r.duration||0} min</div>
+    </div>`;
+  }).join('');
+  list.innerHTML = `<div class="rf-row rf-head"><div>Test</div><div>Sana</div><div>Natija</div><div>%</div><div>Vaqt</div></div>${rows}`;
+}
+
+function clearResults() {
+  if (confirm('Barcha natijalarni o\'chirishni xohlaysizmi?')) {
+    localStorage.removeItem(`al_results_${session?.login}`);
+    location.reload();
+  }
+}
+</script>
+</body>
+</html>

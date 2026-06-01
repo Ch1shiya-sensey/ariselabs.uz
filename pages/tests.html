@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock Testlar — AriseLabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<style>
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.mod-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:18px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.mod-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),#c084fc);transform:scaleX(0);transition:transform .3s}
+.mod-card:hover{border-color:var(--border-h);transform:translateY(-3px);box-shadow:var(--shadow)}
+.mod-card:hover::before{transform:scaleX(1)}
+.mod-card.locked{opacity:.6;cursor:default}
+.mod-card.locked:hover{transform:none;box-shadow:none;border-color:var(--border)}
+.mc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.mc-num{font-family:var(--mono);font-size:11px;color:var(--text3);font-weight:600}
+.mc-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+.mc-badge.free{background:rgba(34,197,94,.15);color:var(--green)}
+.mc-badge.pro{background:linear-gradient(90deg,var(--purple),#c084fc);color:#fff}
+.mc-title{font-size:16px;font-weight:700;margin-bottom:4px}
+.mc-meta{font-size:12px;color:var(--text3);margin-bottom:12px}
+.mc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.mc-tag{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--purpleD);color:var(--purple);font-weight:600}
+.mc-tag.grammar{background:rgba(124,92,255,.12);color:var(--purple)}
+.mc-tag.vocabulary{background:rgba(34,197,94,.12);color:var(--green)}
+.mc-tag.reading{background:rgba(245,158,11,.12);color:var(--yellow)}
+.mc-tag.mixed{background:rgba(99,160,255,.12);color:#60a5fa}
+.mc-btn{font-size:13px;font-weight:700;color:var(--purple)}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.ftab{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;font-family:var(--font)}
+.ftab:hover{border-color:var(--border-h);color:var(--purple)}
+.ftab.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.pro-banner{background:linear-gradient(135deg,rgba(124,92,255,.15),rgba(192,132,252,.1));border:1px solid rgba(124,92,255,.3);border-radius:16px;padding:18px 20px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.pb-text h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.pb-text p{font-size:13px;color:var(--text2)}
+</style>
+</head>
+<body class="page-body">
+<script src="../js/theme.js"></script>
+
+<div class="dash-wrap">
+<aside class="sidebar" id="sidebar">
+  <a href="dashboard.html" class="sb-logo">Arise<span>Labs</span></a>
+  <nav class="sb-nav">
+    <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+    <a href="tests.html" class="sb-link active"><span class="sb-icon">📝</span>Mock Testlar</a>
+    <a href="modules.html" class="sb-link"><span class="sb-icon">📚</span>Modullar</a>
+    <a href="results.html" class="sb-link"><span class="sb-icon">📊</span>Natijalar</a>
+    <a href="profile.html" class="sb-link"><span class="sb-icon">👤</span>Profil</a>
+  </nav>
+  <div class="sb-bottom">
+    <div class="sb-plan-chip"><span class="sb-plan-badge planBadge">FREE</span><span class="sb-plan-info userName">—</span></div>
+    <button class="sb-logout" onclick="logout()">← Chiqish</button>
+  </div>
+</aside>
+
+<div class="dash-main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="burger-sb" onclick="toggleSidebar()">☰</button>
+      <div class="topbar-title" data-uz="Mock Testlar" data-ru="Мок-тесты">Mock Testlar</div>
+    </div>
+    <div class="topbar-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="langUZ" onclick="setLang('uz')">UZ</button>
+        <button class="lang-btn" id="langRU" onclick="setLang('ru')">RU</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()"><span id="themeIcon">☀</span></button>
+      <div class="topbar-user"><span class="userName">—</span><div class="user-av userInitial">U</div></div>
+    </div>
+  </div>
+
+  <div class="dash-content">
+    <div class="dc-inner">
+      <div id="proBanner" style="display:none" class="pro-banner">
+        <div class="pb-text">
+          <h3 data-uz="🔒 Pro reja — barcha 20 ta modul" data-ru="🔒 Pro план — все 20 модулей">🔒 Pro reja — barcha 20 ta modul</h3>
+          <p data-uz="Bepul rejada faqat 2 ta modul. Pro uchun to'lov qiling." data-ru="В бесплатном плане только 2 модуля. Оплатите Pro.">Bepul rejada faqat 2 ta modul. Pro uchun to'lov qiling.</p>
+        </div>
+        <a href="payment.html" class="btn-primary" data-uz="Pro olish →" data-ru="Получить Pro →">Pro olish →</a>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="ftab active" onclick="filterMods('all',this)" data-uz="Hammasi" data-ru="Все">Hammasi</button>
+        <button class="ftab" onclick="filterMods('grammar',this)" data-uz="Grammar" data-ru="Грамматика">Grammar</button>
+        <button class="ftab" onclick="filterMods('vocabulary',this)" data-uz="Vocabulary" data-ru="Лексика">Vocabulary</button>
+        <button class="ftab" onclick="filterMods('reading',this)" data-uz="Reading" data-ru="Чтение">Reading</button>
+        <button class="ftab" onclick="filterMods('mixed',this)" data-uz="Mock Test" data-ru="Мок-тест">Mock Test</button>
+      </div>
+
+      <div class="mod-grid" id="modGrid"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="ai-chat-fab"><button class="ai-fab-btn" onclick="toggleChat()">🤖</button></div>
+<div class="ai-chat-box" id="aiChatBox">
+  <div class="ai-chat-header"><span class="ai-dot"></span><span>AI Yordamchi</span><button onclick="toggleChat()">✕</button></div>
+  <div class="ai-messages" id="chatMessages"><div class="ai-msg bot">Savol bering! 🎓</div></div>
+  <div class="ai-chat-input"><input type="text" id="chatInput" placeholder="Savol bering..."><button onclick="sendChatMsg()">→</button></div>
+</div>
+
+<script src="../js/lang.js"></script>
+<script src="../js/dashboard.js"></script>
+<script>
+const MODULES_LIST = [
+  {n:1, title:'Present Tenses',      tag:'grammar',    plan:'free'},
+  {n:2, title:'Past Tenses',         tag:'grammar',    plan:'free'},
+  {n:3, title:'Future Tenses',       tag:'grammar',    plan:'pro'},
+  {n:4, title:'Modal Verbs',         tag:'grammar',    plan:'pro'},
+  {n:5, title:'Conditionals',        tag:'grammar',    plan:'pro'},
+  {n:6, title:'Passive Voice',       tag:'grammar',    plan:'pro'},
+  {n:7, title:'Relative Clauses',    tag:'grammar',    plan:'pro'},
+  {n:8, title:'Reported Speech',     tag:'grammar',    plan:'pro'},
+  {n:9, title:'Articles',            tag:'grammar',    plan:'pro'},
+  {n:10,title:'Prepositions',        tag:'grammar',    plan:'pro'},
+  {n:11,title:'Synonyms & Antonyms', tag:'vocabulary', plan:'pro'},
+  {n:12,title:'Word Formation',      tag:'vocabulary', plan:'pro'},
+  {n:13,title:'Phrasal Verbs',       tag:'vocabulary', plan:'pro'},
+  {n:14,title:'Vocabulary DTM',      tag:'vocabulary', plan:'pro'},
+  {n:15,title:'Reading: Main Idea',  tag:'reading',    plan:'pro'},
+  {n:16,title:'Reading: Details',    tag:'reading',    plan:'pro'},
+  {n:17,title:'Reading: Inference',  tag:'reading',    plan:'pro'},
+  {n:18,title:'Mixed Mock Test 1',   tag:'mixed',      plan:'pro'},
+  {n:19,title:'Mixed Mock Test 2',   tag:'mixed',      plan:'pro'},
+  {n:20,title:'Mixed Mock Test 3',   tag:'mixed',      plan:'pro'},
+];
+
+const isPro = session?.plan === 'pro';
+if (!isPro) document.getElementById('proBanner').style.display = 'flex';
+
+function renderMods(filter) {
+  const grid = document.getElementById('modGrid');
+  const list = filter === 'all' ? MODULES_LIST : MODULES_LIST.filter(m => m.tag === filter);
+  grid.innerHTML = list.map(m => {
+    const locked = m.plan === 'pro' && !isPro;
+    return `<div class="mod-card${locked?' locked':''}" onclick="${locked ? 'location.href=\'payment.html\'' : 'startMod('+m.n+')'}">
+      <div class="mc-top">
+        <span class="mc-num">M${String(m.n).padStart(2,'0')}</span>
+        <span class="mc-badge ${m.plan}">${m.plan === 'free' ? 'BEPUL' : 'PRO'}</span>
+      </div>
+      <div class="mc-title">${locked?'🔒 ':'' }${m.title}</div>
+      <div class="mc-meta">30 savol · 30 daqiqa · DTM format</div>
+      <div class="mc-tags"><span class="mc-tag ${m.tag}">${m.tag}</span></div>
+      <div class="mc-btn">${locked ? 'Pro kerak →' : 'Boshlash →'}</div>
+    </div>`;
+  }).join('');
+}
+
+function filterMods(type, btn) {
+  document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMods(type);
+}
+
+function startMod(n) { location.href = 'test.html?mod=' + n; }
+
+renderMods('all');
+</script>
+</body>
+</html>

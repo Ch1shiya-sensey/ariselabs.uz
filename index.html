@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AriseLabs — DTM Ingliz Tili Tayyorgarlik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+<!-- ===== MUSIC PLAYER ===== -->
+<div class="music-player" id="musicPlayer">
+  <audio id="bgMusic" loop>
+    <!-- Add your music file to audio/bg.mp3 -->
+    <source src="audio/Harry Gregson-Williams - The Martian Score Suite.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-toggle" id="musicBtn" onclick="toggleMusic()">
+    <span id="musicIcon">♪</span>
+  </button>
+  <div class="music-bars" id="musicBars">
+    <i></i><i></i><i></i><i></i><i></i>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">Arise<span>Labs</span></a>
+
+  <div class="nav-center" id="navLinks">
+    <a href="#features" class="nav-link" data-uz="Imkoniyatlar" data-ru="Возможности">Imkoniyatlar</a>
+    <a href="#modules" class="nav-link" data-uz="Modullar" data-ru="Модули">Modullar</a>
+    <a href="#pricing" class="nav-link" data-uz="Narxlar" data-ru="Цены">Narxlar</a>
+    <a href="#faq" class="nav-link" data-uz="FAQ" data-ru="FAQ">FAQ</a>
+  </div>
+
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="langUZ" onclick="setLang('uz')">UZ</button>
+      <button class="lang-btn" id="langRU" onclick="setLang('ru')">RU</button>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Theme">
+      <span id="themeIcon">☀</span>
+    </button>
+    <a href="pages/login.html" class="btn-ghost" data-uz="Kirish" data-ru="Войти">Kirish</a>
+    <a href="pages/payment.html" class="btn-primary" data-uz="Boshlash →" data-ru="Начать →">Boshlash →</a>
+  </div>
+  <button class="burger" onclick="toggleMobileMenu()">☰</button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="toggleMobileMenu()">Imkoniyatlar</a>
+  <a href="#modules" onclick="toggleMobileMenu()">Modullar</a>
+  <a href="#pricing" onclick="toggleMobileMenu()">Narxlar</a>
+  <a href="pages/login.html">Kirish</a>
+  <a href="pages/payment.html" class="btn-primary" style="text-align:center;margin-top:8px">Boshlash →</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-glow g1"></div>
+  <div class="hero-glow g2"></div>
+  <div class="hero-glow g3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="pulse-dot"></span>
+      <span data-uz="DTM Avgust 2026 — Ingliz tili" data-ru="ЕГЭ Август 2026 — Английский язык">DTM  — Ingliz tili</span>
+    </div>
+
+    <h1 class="hero-h1">
+      <span class="h1-line" data-uz="DTM Ingliz" data-ru="Английский язык">DTM Ingliz</span>
+      <span class="h1-accent" data-uz="Tili" data-ru="DTM">Tili</span>
+      <span class="h1-line" data-uz="imtihoniga tayyor" data-ru="готовьтесь уверенно">imtihoniga tayyor</span>
+      <span class="h1-line gradient-text" data-uz="bo'ling!" data-ru="bo'ling!">bo'ling!</span>
+    </h1>
+
+    <p class="hero-sub" data-uz="600+ real DTM savol, 20 ta modul, sun'iy intellekt yordamchi va batafsil tahlil bilan ingliz tili imtihoniga ishonchli tayyorlaning." data-ru="600+ реальных вопросов DTM, 20 модулей, ИИ-помощник и детальная аналитика для уверенной подготовки к экзамену.">
+      600+ real DTM savol, 20 ta modul, sun'iy intellekt yordamchi va batafsil tahlil bilan ingliz tili imtihoniga ishonchli tayyorlaning.
+    </p>
+
+    <div class="hero-actions">
+      <a href="pages/login.html" class="btn-primary btn-xl">
+        <span data-uz="Bepul boshlash →" data-ru="Начать бесплатно →">Bepul boshlash →</span>
+      </a>
+      <a href="#modules" class="btn-ghost btn-xl">
+        <span data-uz="Modullarni ko'rish" data-ru="Посмотреть модули">Modullarni ko'rish</span>
+      </a>
+    </div>
+
+    <div class="hero-counters">
+      <div class="counter-item">
+        <span class="counter-n">600+</span>
+        <span class="counter-l" data-uz="Savol" data-ru="Вопросов">Savol</span>
+      </div>
+      <div class="counter-sep"></div>
+      <div class="counter-item">
+        <span class="counter-n">20</span>
+        <span class="counter-l" data-uz="Modul" data-ru="Модулей">Modul</span>
+      </div>
+      <div class="counter-sep"></div>
+      <div class="counter-item">
+        <span class="counter-n">AI</span>
+        <span class="counter-l" data-uz="Yordamchi" data-ru="Помощник">Yordamchi</span>
+      </div>
+      <div class="counter-sep"></div>
+      <div class="counter-item">
+        <span class="counter-n">DTM</span>
+        <span class="counter-l" data-uz="Format" data-ru="Формат">Format</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating test preview card -->
+  <div class="hero-card-wrap">
+    <div class="hero-preview-card">
+      <div class="hpc-header">
+        <div class="hpc-dot red"></div><div class="hpc-dot yellow"></div><div class="hpc-dot green"></div>
+        <span class="hpc-title">Mock Test · Module 5</span>
+        <span class="hpc-timer">⏱ 24:38</span>
+      </div>
+      <div class="hpc-body">
+        <div class="hpc-qnum">Savol 12 / 30</div>
+        <p class="hpc-q">Choose the correct form: She ___ to the market when it started raining.</p>
+        <div class="hpc-opts">
+          <div class="hpc-opt">A. goes</div>
+          <div class="hpc-opt hpc-sel">B. was going</div>
+          <div class="hpc-opt">C. went</div>
+          <div class="hpc-opt">D. has gone</div>
+        </div>
+        <div class="hpc-bar"><div class="hpc-bar-fill" style="width:40%"></div></div>
+      </div>
+      <div class="hpc-footer">
+        <span class="hpc-score">✓ 11 to'g'ri</span>
+        <button class="hpc-next">Keyingi →</button>
+      </div>
+    </div>
+    <div class="float-tag ft1">📊 Natija: 92%</div>
+    <div class="float-tag ft2">🔥 7 kun streak</div>
+    <div class="float-tag ft3">⚡ Pro faol</div>
+    <div class="float-tag ft4">🤖 AI yordamchi</div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features section" id="features">
+  <div class="container">
+    <div class="section-badge" data-uz="Nima uchun AriseLabs?" data-ru="Почему AriseLabs?">Nima uchun AriseLabs?</div>
+    <h2 class="section-title" data-uz="Barcha kerakli <em>vositalar</em>" data-ru="Все нужные <em>инструменты</em>">Barcha kerakli <em>vositalar</em></h2>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon">📝</div>
+        <h3 data-uz="Real DTM Format" data-ru="Реальный формат DTM">Real DTM Format</h3>
+        <p data-uz="Haqiqiy DTM imtihon formatida — 30 savol, 30 daqiqa. Grammar, Vocabulary va Reading." data-ru="Реальный формат экзамена — 30 вопросов, 30 минут. Grammar, Vocabulary и Reading.">Haqiqiy DTM imtihon formatida — 30 savol, 30 daqiqa. Grammar, Vocabulary va Reading.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">🤖</div>
+        <h3 data-uz="AI Yordamchi Bot" data-ru="ИИ Помощник">AI Yordamchi Bot</h3>
+        <p data-uz="Sun'iy intellekt yordamida istalgan savolingizga javob oling. Ingliz tili qoidalarini tushuntiradi." data-ru="Получайте ответы на любые вопросы с помощью ИИ. Объясняет правила английского языка.">Sun'iy intellekt yordamida istalgan savolingizga javob oling.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📊</div>
+        <h3 data-uz="Batafsil Tahlil" data-ru="Детальная аналитика">Batafsil Tahlil</h3>
+        <p data-uz="Kuchli va zaif tomonlaringizni ko'rsatuvchi statistika. Qaysi mavzuda ko'proq mashq kerak?" data-ru="Статистика ваших сильных и слабых сторон. Какая тема требует больше практики?">Kuchli va zaif tomonlaringizni ko'rsatuvchi statistika.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">🎯</div>
+        <h3 data-uz="20 ta Modul" data-ru="20 Модулей">20 ta Modul</h3>
+        <p data-uz="Grammar, Vocabulary, Reading, Listening va boshqa mavzular bo'yicha alohida modullar." data-ru="Отдельные модули по Grammar, Vocabulary, Reading и другим темам.">Grammar, Vocabulary, Reading va boshqa mavzular bo'yicha alohida modullar.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">⏱</div>
+        <h3 data-uz="Real Taymer" data-ru="Реальный таймер">Real Taymer</h3>
+        <p data-uz="DTM sharoitida mashq qiling — real vaqt chegarasi bilan. Oxirgi 5 daqiqada ogohlantirish." data-ru="Практикуйтесь в условиях DTM — с реальным ограничением времени.">DTM sharoitida mashq qiling — real vaqt chegarasi bilan.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📱</div>
+        <h3 data-uz="Har Qurilmada" data-ru="На любом устройстве">Har Qurilmada</h3>
+        <p data-uz="Telefon, planshet yoki kompyuter — istalgan qurilmadan kiring va mashq qiling." data-ru="Телефон, планшет или компьютер — занимайтесь с любого устройства.">Telefon, planshet yoki kompyuter — istalgan qurilmadan kiring.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULES ===== -->
+<section class="modules-section section" id="modules">
+  <div class="container">
+    <div class="section-badge" data-uz="Test Modullari" data-ru="Модули тестов">Test Modullari</div>
+    <h2 class="section-title" data-uz="20 ta <em>modul</em>, 600+ savol" data-ru="20 <em>модулей</em>, 600+ вопросов">20 ta <em>modul</em>, 600+ savol</h2>
+    <div class="modules-grid" id="modulesGrid"></div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="howto section">
+  <div class="container">
+    <div class="section-badge" data-uz="Qanday ishlaydi" data-ru="Как это работает">Qanday ishlaydi</div>
+    <h2 class="section-title" data-uz="3 qadam — <em>tayyor!</em>" data-ru="3 шага — <em>готово!</em>">3 qadam — <em>tayyor!</em></h2>
+    <div class="howto-steps">
+      <div class="howto-step reveal">
+        <div class="hs-num">01</div>
+        <div class="hs-icon">💳</div>
+        <h3 data-uz="To'lov qiling" data-ru="Оплатите">To'lov qiling</h3>
+        <p data-uz="Ko'rsatilgan karta raqamiga aniq summani yuboring. Chekni saqlang." data-ru="Переведите точную сумму на указанный номер карты. Сохраните чек.">Ko'rsatilgan karta raqamiga aniq summani yuboring. Chekni saqlang.</p>
+      </div>
+      <div class="hs-arrow">→</div>
+      <div class="howto-step reveal">
+        <div class="hs-num">02</div>
+        <div class="hs-icon">📩</div>
+        <h3 data-uz="Tasdiqlang" data-ru="Подтвердите">Tasdiqlang</h3>
+        <p data-uz="Chek skrinshotini Telegram'ga yuboring. Biz 1-2 soat ichida login va parol yuboramiz." data-ru="Отправьте скриншот чека в Telegram. Мы пришлём логин и пароль в течение 1-2 часов.">Chek skrinshotini Telegram'ga yuboring. 10 daqiqa ichida login-parol yuboramiz.</p>
+      </div>
+      <div class="hs-arrow">→</div>
+      <div class="howto-step reveal">
+        <div class="hs-num">03</div>
+        <div class="hs-icon">🚀</div>
+        <h3 data-uz="Mashq boshlang" data-ru="Начните практику">Mashq boshlang</h3>
+        <p data-uz="Kiring va DTM ingliz tili testlarini ishlashni boshlang. AI yordamchi doim tayyor!" data-ru="Войдите и начните проходить тесты. ИИ-помощник всегда готов помочь!">Kiring va DTM ingliz tili testlarini ishlashni boshlang!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing section" id="pricing">
+  <div class="container">
+    <div class="section-badge" data-uz="Narxlar" data-ru="Цены">Narxlar</div>
+    <h2 class="section-title" data-uz="Qulay <em>narxlar</em>" data-ru="Доступные <em>цены</em>">Qulay <em>narxlar</em></h2>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="pc-header">
+          <div class="pc-name" data-uz="Bepul" data-ru="Бесплатно">Bepul</div>
+          <div class="pc-price">0 <span data-uz="UZS/oy" data-ru="UZS/мес">UZS/oy</span></div>
+          <p class="pc-desc" data-uz="Sinab ko'rish uchun" data-ru="Для ознакомления">Sinab ko'rish uchun</p>
+        </div>
+        <ul class="pc-list">
+          <li class="yes" data-uz="✓ 2 ta modul (60 savol)" data-ru="✓ 2 модуля (60 вопросов)">✓ 2 ta modul (60 savol)</li>
+          <li class="yes" data-uz="✓ Natijalarni ko'rish" data-ru="✓ Просмотр результатов">✓ Natijalarni ko'rish</li>
+          <li class="no" data-uz="✗ AI yordamchi" data-ru="✗ ИИ помощник">✗ AI yordamchi</li>
+          <li class="no" data-uz="✗ 20 ta modul" data-ru="✗ 20 модулей">✗ 20 ta modul</li>
+          <li class="no" data-uz="✗ Batafsil statistika" data-ru="✗ Детальная статистика">✗ Batafsil statistika</li>
+        </ul>
+        <a href="pages/login.html" class="btn-outline btn-full" data-uz="Bepul boshlash" data-ru="Начать бесплатно">Bepul boshlash</a>
+      </div>
+
+      <div class="price-card price-pro reveal">
+        <div class="pc-badge" data-uz="Eng mashhur" data-ru="Популярный">Eng mashhur</div>
+        <div class="pc-header">
+          <div class="pc-name">Pro</div>
+          <div class="pc-price" id="proPrice">36,000 <span data-uz="UZS/oy" data-ru="UZS/мес">UZS/oy</span></div>
+          <p class="pc-desc" data-uz="DTM ga jiddiy tayyorlanuvchilar uchun" data-ru="Для серьёзной подготовки к DTM">DTM ga jiddiy tayyorlanuvchilar uchun</p>
+        </div>
+        <ul class="pc-list">
+          <li class="yes" data-uz="✓ 20 ta modul (600+ savol)" data-ru="✓ 20 модулей (600+ вопросов)">✓ 20 ta modul (600+ savol)</li>
+          <li class="yes" data-uz="✓ AI yordamchi bot" data-ru="✓ ИИ помощник бот">✓ AI yordamchi bot</li>
+          <li class="yes" data-uz="✓ Batafsil statistika" data-ru="✓ Детальная статистика">✓ Batafsil statistika</li>
+          <li class="yes" data-uz="✓ Natijalar tarixi" data-ru="✓ История результатов">✓ Natijalar tarixi</li>
+          <li class="yes" data-uz="✓ Izohli javoblar" data-ru="✓ Объяснения ответов">✓ Izohli javoblar</li>
+        </ul>
+        <a href="pages/payment.html" class="btn-primary btn-full" data-uz="Pro olish →" data-ru="Получить Pro →">Pro olish →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq section" id="faq">
+  <div class="container faq-wrap">
+    <div class="section-badge" data-uz="Savol-javob" data-ru="Вопросы-ответы">Savol-javob</div>
+    <h2 class="section-title" data-uz="Ko'p so'raladigan <em>savollar</em>" data-ru="Часто задаваемые <em>вопросы</em>">Ko'p so'raladigan <em>savollar</em></h2>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section section">
+  <div class="container cta-inner">
+    <h2 data-uz="Bugun boshlang — DTM kutmoqda!" data-ru="Начните сегодня — DTM ждёт!">Bugun boshlang — DTM kutmoqda!</h2>
+    <p data-uz="Har kuni 30 daqiqa mashq — imtihon kuni ishonch." data-ru="30 минут практики каждый день — уверенность на экзамене.">Har kuni 30 daqiqa mashq — imtihon kuni ishonch.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:2rem">
+      <a href="pages/login.html" class="btn-primary btn-xl" data-uz="Bepul boshlash →" data-ru="Начать бесплатно →">Bepul boshlash →</a>
+      <a href="pages/payment.html" class="btn-outline btn-xl" data-uz="Pro olish" data-ru="Получить Pro">Pro olish</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <div class="footer-logo">Arise<span>Labs</span></div>
+      <p class="footer-tagline" data-uz="DTM Ingliz tili tayyorgarlik platformasi" data-ru="Платформа подготовки к DTM по английскому языку">DTM Ingliz tili tayyorgarlik platformasi</p>
+      <div class="footer-socials">
+        <!-- Change to your real links -->
+        <a href="https://t.me/arisefxc" target="_blank" class="social-link tg">✈ Telegram</a>
+        <a href="https://instagram.com/ariselabs_uz" target="_blank" class="social-link ig">◎ Instagram</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="fl-col">
+        <div class="fl-title" data-uz="Platforma" data-ru="Платформа">Platforma</div>
+        <a href="pages/login.html" data-uz="Kirish" data-ru="Войти">Kirish</a>
+        <a href="pages/payment.html" data-uz="To'lov" data-ru="Оплата">To'lov</a>
+        <a href="#modules" data-uz="Modullar" data-ru="Модули">Modullar</a>
+      </div>
+      <div class="fl-col">
+        <div class="fl-title" data-uz="Yordam" data-ru="Помощь">Yordam</div>
+        <a href="#faq">FAQ</a>
+        <a href="https://t.me/@meloneex" target="_blank" data-uz="Telegram" data-ru="Telegram">Telegram</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AriseLabs.uz</span>
+    <span data-uz="DTM Ingliz Tili · O'zbekiston" data-ru="DTM Английский · Узбекистан">DTM Ingliz Tili</span>
+  </div>
+</footer>
+
+<script src="js/lang.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/music.js"></script>
+<script src="js/landing.js"></script>
+</body>
+</html>

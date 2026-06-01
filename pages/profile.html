@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profil — AriseLabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<style>
+.profile-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;max-width:500px;margin-bottom:16px}
+.profile-av{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--purple),#c084fc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;margin-bottom:16px}
+.profile-name{font-size:22px;font-weight:800;margin-bottom:6px}
+.plan-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:20px}
+.plan-chip.pro{background:linear-gradient(90deg,var(--purple),#c084fc);color:#fff}
+.plan-chip.free{background:var(--card);border:1px solid var(--border);color:var(--text2)}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.info-row:last-child{border-bottom:none}
+.ir-label{font-size:13px;color:var(--text2)}
+.ir-val{font-size:14px;font-weight:600;color:var(--text)}
+.upgrade-card{background:linear-gradient(135deg,rgba(124,92,255,.15),rgba(192,132,252,.1));border:1px solid rgba(124,92,255,.3);border-radius:16px;padding:22px;max-width:500px;margin-bottom:16px}
+.upgrade-card h3{font-size:18px;font-weight:700;margin-bottom:6px}
+.upgrade-card p{font-size:13px;color:var(--text2);margin-bottom:16px}
+.danger-zone{background:var(--card);border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:18px;max-width:500px}
+.danger-zone h4{font-size:14px;font-weight:700;color:var(--red);margin-bottom:12px}
+.danger-btn{background:none;border:1px solid rgba(239,68,68,.4);color:var(--red);border-radius:8px;padding:9px 18px;font-size:13px;cursor:pointer;font-family:var(--font);transition:all .2s}
+.danger-btn:hover{background:rgba(239,68,68,.1)}
+</style>
+</head>
+<body class="page-body">
+<script src="../js/theme.js"></script>
+
+<div class="dash-wrap">
+<aside class="sidebar" id="sidebar">
+  <a href="dashboard.html" class="sb-logo">Arise<span>Labs</span></a>
+  <nav class="sb-nav">
+    <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+    <a href="tests.html"     class="sb-link"><span class="sb-icon">📝</span>Mock Testlar</a>
+    <a href="modules.html"   class="sb-link"><span class="sb-icon">📚</span>Modullar</a>
+    <a href="results.html"   class="sb-link"><span class="sb-icon">📊</span>Natijalar</a>
+    <a href="profile.html"   class="sb-link active"><span class="sb-icon">👤</span>Profil</a>
+  </nav>
+  <div class="sb-bottom">
+    <div class="sb-plan-chip"><span class="sb-plan-badge planBadge">FREE</span><span class="sb-plan-info userName">—</span></div>
+    <button class="sb-logout" onclick="logout()">← Chiqish</button>
+  </div>
+</aside>
+
+<div class="dash-main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="burger-sb" onclick="toggleSidebar()">☰</button>
+      <div class="topbar-title" data-uz="Profilim" data-ru="Мой профиль">Profilim</div>
+    </div>
+    <div class="topbar-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="langUZ" onclick="setLang('uz')">UZ</button>
+        <button class="lang-btn" id="langRU" onclick="setLang('ru')">RU</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()"><span id="themeIcon">☀</span></button>
+      <div class="topbar-user"><span class="userName">—</span><div class="user-av userInitial">U</div></div>
+    </div>
+  </div>
+
+  <div class="dash-content">
+    <div class="dc-inner">
+      <div class="profile-card">
+        <div class="profile-av" id="profileAv">U</div>
+        <div class="profile-name userName">—</div>
+        <div class="plan-chip" id="planChip">FREE</div>
+        <div class="info-row">
+          <span class="ir-label" data-uz="Login" data-ru="Логин">Login</span>
+          <span class="ir-val" id="profileLogin">—</span>
+        </div>
+        <div class="info-row">
+          <span class="ir-label" data-uz="Reja" data-ru="План">Reja</span>
+          <span class="ir-val" id="profilePlan">—</span>
+        </div>
+        <div class="info-row">
+          <span class="ir-label" data-uz="Muddati" data-ru="Срок">Muddati</span>
+          <span class="ir-val" id="profileExpiry">—</span>
+        </div>
+        <div class="info-row">
+          <span class="ir-label" data-uz="Ishlangan testlar" data-ru="Пройдено тестов">Ishlangan testlar</span>
+          <span class="ir-val" id="profileTests">0</span>
+        </div>
+        <div class="info-row">
+          <span class="ir-label" data-uz="O'rtacha ball" data-ru="Средний балл">O'rtacha ball</span>
+          <span class="ir-val" id="profileAvg">—</span>
+        </div>
+      </div>
+
+      <div class="upgrade-card" id="upgradeCard" style="display:none">
+        <h3>🚀 <span data-uz="Pro rejaga o'ting!" data-ru="Перейдите на Pro!">Pro rejaga o'ting!</span></h3>
+        <p data-uz="Barcha 20 ta modul, AI yordamchi va batafsil statistika uchun Pro rejani oling." data-ru="Все 20 модулей, ИИ-помощник и детальная статистика в Pro плане.">Barcha 20 ta modul, AI yordamchi va batafsil statistika uchun Pro rejani oling.</p>
+        <a href="payment.html" class="btn-primary" data-uz="Pro olish — 29,000 UZS/oy →" data-ru="Получить Pro — 29,000 UZS/мес →">Pro olish — 29,000 UZS/oy →</a>
+      </div>
+
+      <div class="danger-zone">
+        <h4 data-uz="Xavfli hudud" data-ru="Опасная зона">Xavfli hudud</h4>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="danger-btn" onclick="logout()" data-uz="Chiqish" data-ru="Выйти">Chiqish</button>
+          <button class="danger-btn" onclick="deleteAccount()" data-uz="Akkauntni o'chirish" data-ru="Удалить аккаунт">Akkauntni o'chirish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="ai-chat-fab"><button class="ai-fab-btn" onclick="toggleChat()">🤖</button></div>
+<div class="ai-chat-box" id="aiChatBox">
+  <div class="ai-chat-header"><span class="ai-dot"></span><span>AI Yordamchi</span><button onclick="toggleChat()">✕</button></div>
+  <div class="ai-messages" id="chatMessages"><div class="ai-msg bot">Savol bering! 🎓</div></div>
+  <div class="ai-chat-input"><input type="text" id="chatInput" placeholder="Savol bering..."><button onclick="sendChatMsg()">→</button></div>
+</div>
+
+<script src="../js/lang.js"></script>
+<script src="../js/dashboard.js"></script>
+<script>
+const plan = session?.plan || 'free';
+const name = session?.name || '—';
+
+document.getElementById('profileAv').textContent    = name[0]?.toUpperCase() || 'U';
+document.getElementById('profileLogin').textContent = session?.login || '—';
+document.getElementById('profilePlan').textContent  = plan === 'pro' ? '⭐ Pro' : '🆓 Bepul';
+document.getElementById('profileExpiry').textContent= session?.expiry || '—';
+
+const chip = document.getElementById('planChip');
+chip.textContent = plan === 'pro' ? '⭐ PRO' : '🆓 BEPUL';
+chip.className   = `plan-chip ${plan}`;
+
+if (plan !== 'pro') document.getElementById('upgradeCard').style.display = 'block';
+
+const results = JSON.parse(localStorage.getItem(`al_results_${session?.login}`) || '[]');
+document.getElementById('profileTests').textContent = results.length;
+const avg = results.length ? Math.round(results.reduce((a,r)=>a+r.percent,0)/results.length) : null;
+document.getElementById('profileAvg').textContent   = avg !== null ? avg + '%' : '—';
+
+function deleteAccount() {
+  if (confirm('Akkauntingizni o\'chirishni xohlaysizmi? Barcha ma\'lumotlar yo\'qoladi.')) {
+    const stored = JSON.parse(localStorage.getItem('al_users') || '[]');
+    const updated = stored.filter(u => u.login !== session?.login);
+    localStorage.setItem('al_users', JSON.stringify(updated));
+    localStorage.removeItem('al_user');
+    localStorage.removeItem(`al_results_${session?.login}`);
+    window.location.href = '../index.html';
+  }
+}
+</script>
+</body>
+</html>

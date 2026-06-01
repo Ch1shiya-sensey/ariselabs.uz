@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ro'yxatdan o'tish — AriseLabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body id="registerPage" class="page-body">
+<script src="../js/theme.js"></script>
+
+<nav class="navbar" id="nav">
+  <a href="../index.html" class="nav-logo">Arise<span>Labs</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="langUZ" onclick="setLang('uz')">UZ</button>
+      <button class="lang-btn" id="langRU" onclick="setLang('ru')">RU</button>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()"><span id="themeIcon">☀</span></button>
+  </div>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-bg-g1"></div>
+  <div class="auth-bg-g2"></div>
+  <div class="auth-card">
+    <a href="../index.html" class="auth-logo-link">Arise<span>Labs</span></a>
+    <h2 class="auth-title" data-uz="Ro'yxatdan o'tish" data-ru="Регистрация">Ro'yxatdan o'tish</h2>
+    <p class="auth-sub" data-uz="Bepul akkaunt yarating" data-ru="Создайте бесплатный аккаунт">Bepul akkaunt yarating</p>
+
+    <div id="registerForm">
+      <div id="regError" class="form-error" style="display:none"></div>
+      <div class="form-group">
+        <label class="form-label" data-uz="Ismingiz" data-ru="Ваше имя">Ismingiz</label>
+        <input type="text" id="regName" class="form-input" data-uz="Ism Familiya" data-ru="Имя Фамилия" placeholder="Ism Familiya">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-uz="Login (faqat lotin harflari)" data-ru="Логин (только латиница)">Login</label>
+        <input type="text" id="regLogin" class="form-input" placeholder="loginname" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-uz="Parol (kamida 6 ta belgi)" data-ru="Пароль (минимум 6 символов)">Parol</label>
+        <div class="pass-wrap">
+          <input type="password" id="regPass" class="form-input" placeholder="••••••••" autocomplete="new-password">
+          <button class="pass-eye" onclick="togglePass('regPass')" type="button">👁</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-uz="Parolni tasdiqlang" data-ru="Подтвердите пароль">Parolni tasdiqlang</label>
+        <div class="pass-wrap">
+          <input type="password" id="regPass2" class="form-input" placeholder="••••••••" autocomplete="new-password">
+          <button class="pass-eye" onclick="togglePass('regPass2')" type="button">👁</button>
+        </div>
+      </div>
+      <div style="background:rgba(124,92,255,0.1);border:1px solid rgba(124,92,255,0.3);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--text2);margin-bottom:14px">
+        <span data-uz="📋 Bepul reja: 2 ta modul (60 savol). Pro reja uchun — to'lov sahifasiga o'ting." data-ru="📋 Бесплатный план: 2 модуля (60 вопросов). Для Pro — перейдите на страницу оплаты.">📋 Bepul reja: 2 ta modul (60 savol). Pro reja uchun — to'lov sahifasiga o'ting.</span>
+      </div>
+      <button class="btn-primary btn-full" onclick="doRegister()" data-uz="Ro'yxatdan o'tish →" data-ru="Зарегистрироваться →">Ro'yxatdan o'tish →</button>
+    </div>
+
+    <div class="auth-divider"><span data-uz="yoki" data-ru="или">yoki</span></div>
+    <p class="auth-footer">
+      <span data-uz="Allaqachon akkauntingiz bormi?" data-ru="Уже есть аккаунт?">Allaqachon akkauntingiz bormi?</span>
+      <a href="login.html" data-uz="Kirish →" data-ru="Войти →">Kirish →</a>
+    </p>
+  </div>
+</div>
+
+<script src="../js/lang.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>

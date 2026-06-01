@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test — AriseLabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/test.css">
+</head>
+<body class="page-body">
+<script src="../js/theme.js"></script>
+
+<!-- TEST TOPBAR -->
+<div class="test-topbar">
+  <a href="tests.html" class="test-back" onclick="return confirmLeave()">← Chiqish</a>
+  <div class="test-name" id="testNameH">Test</div>
+  <div class="test-timer-wrap">
+    <span>⏱</span>
+    <span class="test-timer" id="timerDisplay">30:00</span>
+  </div>
+</div>
+<!-- PROGRESS -->
+<div class="test-progress"><div class="test-progress-fill" id="progressFill"></div></div>
+
+<!-- BODY -->
+<div class="test-body">
+  <!-- QUESTION PANEL -->
+  <div class="q-panel">
+    <div class="q-meta">
+      <span class="q-num" id="qNum">Savol 1 / 30</span>
+      <span class="q-topic-badge grammar" id="qTopicBadge">Grammar</span>
+    </div>
+    <p class="q-text" id="qText">Yuklanmoqda...</p>
+    <div class="q-options" id="qOptions"></div>
+    <div class="q-explanation" id="qExplanation"></div>
+    <div class="q-nav">
+      <button class="btn-ghost" id="prevBtn" onclick="prevQ()" disabled>← Oldingi</button>
+      <button class="btn-primary" id="nextBtn" onclick="nextQ()">Keyingi →</button>
+    </div>
+  </div>
+
+  <!-- GRID PANEL -->
+  <div class="grid-panel">
+    <div class="gp-title" data-uz="SAVOLLAR" data-ru="ВОПРОСЫ">SAVOLLAR</div>
+    <div class="q-grid" id="qGrid"></div>
+    <button class="btn-primary btn-full submit-btn" onclick="confirmSubmit()" data-uz="Testni yakunlash" data-ru="Завершить тест">Testni yakunlash</button>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-bg" id="confirmModal">
+  <div class="modal-box">
+    <div class="confirm-inner">
+      <div class="ci-icon">🤔</div>
+      <h3 data-uz="Testni yakunlashni xohlaysizmi?" data-ru="Хотите завершить тест?">Testni yakunlashni xohlaysizmi?</h3>
+      <p id="unansweredMsg"></p>
+      <div class="ci-btns">
+        <button class="btn-ghost btn-full" onclick="closeConfirm()" data-uz="Davom etish" data-ru="Продолжить">Davom etish</button>
+        <button class="btn-primary btn-full" onclick="submitTest()" data-uz="Yakunlash ✓" data-ru="Завершить ✓">Yakunlash ✓</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT MODAL -->
+<div class="modal-bg" id="resultModal">
+  <div class="modal-box">
+    <div class="result-modal-inner">
+      <div class="rm-circle" id="rmCircle">
+        <span class="rmc-n" id="rmScore">0</span>
+        <span class="rmc-s">/30</span>
+      </div>
+      <h3 id="rmTitle">Natija</h3>
+      <p id="rmMsg"></p>
+      <div class="rm-stats">
+        <div class="rm-stat"><span class="rs-n" id="rmCorrect">0</span><span class="rs-l" data-uz="To'g'ri" data-ru="Верно">To'g'ri</span></div>
+        <div class="rm-stat"><span class="rs-n" id="rmWrong">0</span><span class="rs-l" data-uz="Noto'g'ri" data-ru="Неверно">Noto'g'ri</span></div>
+        <div class="rm-stat"><span class="rs-n" id="rmSkipped">0</span><span class="rs-l" data-uz="O'tkazilgan" data-ru="Пропущено">O'tkazilgan</span></div>
+        <div class="rm-stat"><span class="rs-n" id="rmPercent">0%</span><span class="rs-l">%</span></div>
+      </div>
+      <div class="rm-btns">
+        <button class="btn-ghost btn-full" onclick="reviewAnswers()" data-uz="Javoblarni ko'rish" data-ru="Просмотр ответов">Javoblarni ko'rish</button>
+        <button class="btn-primary btn-full" onclick="location.href='tests.html'" data-uz="Yangi test →" data-ru="Новый тест →">Yangi test →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/lang.js"></script>
+<script src="../js/questions.js"></script>
+<script src="../js/test.js"></script>
+<script>
+function confirmLeave() {
+  return confirm('Testdan chiqmoqchimisiz? Natijalar saqlanmaydi.');
+}
+</script>
+</body>
+</html>

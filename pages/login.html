@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kirish — AriseLabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body id="loginPage" class="page-body">
+<script src="../js/theme.js"></script>
+
+<nav class="navbar" id="nav">
+  <a href="../index.html" class="nav-logo">Arise<span>Labs</span></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="langUZ" onclick="setLang('uz')">UZ</button>
+      <button class="lang-btn" id="langRU" onclick="setLang('ru')">RU</button>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()"><span id="themeIcon">☀</span></button>
+  </div>
+</nav>
+
+<div class="auth-page">
+  <div class="auth-bg-g1"></div>
+  <div class="auth-bg-g2"></div>
+  <div class="auth-card">
+    <a href="../index.html" class="auth-logo-link">Arise<span>Labs</span></a>
+    <h2 class="auth-title" data-uz="Xush kelibsiz!" data-ru="Добро пожаловать!">Xush kelibsiz!</h2>
+    <p class="auth-sub" data-uz="Akkauntingizga kiring" data-ru="Войдите в свой аккаунт">Akkauntingizga kiring</p>
+
+    <div id="loginForm">
+      <div id="loginError" class="form-error" style="display:none"></div>
+      <div class="form-group">
+        <label class="form-label" data-uz="Login" data-ru="Логин">Login</label>
+        <input type="text" id="loginInput" class="form-input" placeholder="login" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-uz="Parol" data-ru="Пароль">Parol</label>
+        <div class="pass-wrap">
+          <input type="password" id="passInput" class="form-input" placeholder="••••••••" autocomplete="current-password">
+          <button class="pass-eye" onclick="togglePass('passInput')" type="button">👁</button>
+        </div>
+      </div>
+      <button class="btn-primary btn-full" onclick="doLogin()" style="margin-top:4px" data-uz="Kirish →" data-ru="Войти →">Kirish →</button>
+    </div>
+
+    <div class="auth-divider"><span data-uz="yoki" data-ru="или">yoki</span></div>
+    <p class="auth-footer">
+      <span data-uz="Akkauntingiz yo'qmi?" data-ru="Нет аккаунта?">Akkauntingiz yo'qmi?</span>
+      <a href="register.html" data-uz="Ro'yxatdan o'tish →" data-ru="Зарегистрироваться →">Ro'yxatdan o'tish →</a>
+    </p>
+    <p class="auth-help">
+      <span data-uz="To'lov qildingizmi? Muammo bo'lsa:" data-ru="Оплатили? Проблемы:">To'lov qildingizmi? Muammo bo'lsa:</span>
+      <!-- ✏️ Change YOUR_TELEGRAM_USERNAME -->
+      <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank">Telegram</a>
+    </p>
+  </div>
+</div>
+
+<script src="../js/lang.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>
